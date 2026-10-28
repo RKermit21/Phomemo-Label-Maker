@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Strip Studio Local</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<header><div class="district">FUSD<br><small>Fresno Unified<br>School District</small></div><div><b>Strip Studio</b><small>CODE 128 · PHOMEMO LABEL PRINTER</small></div><span class="dpi">203 DPI · 14–15 MM TAPE</span></header>
+<main>
+<section class="work">
+<div class="intro">Type or scan your data, tune the bars to fit your tape, then print straight to your Phomemo. Runs in Chrome / Edge.</div>
+<div class="canvasWrap"><button id="resetCanvasBtn" class="canvasReset" type="button" title="Restore the default canvas layout">↺ Reset defaults</button><span class="hint">DRAG · DOUBLE-CLICK TITLE</span><canvas id="labelCanvas" width="320" height="96" aria-label="Label preview"></canvas></div>
+<div class="metrics"><span id="sizeReadout">14 MM TAPE × 40 MM LABEL</span><span id="dotsReadout">320 × 112 DOTS · PRINT BAND 96</span></div>
+<div class="warning" id="warning">D30 output is locked to 12 mm × 40 mm (96 × 320 dots) to avoid clipped prints and extra labels.</div>
+<section class="panel printer">
+<div class="panelHead"><b>PRINTER</b><span id="bluetoothState">DISCONNECTED</span></div>
+<div class="connectrow"><div><b id="printerStatus">No printer connected</b><small>PHOMEMO D30 · BLUETOOTH</small></div><button id="connectBtn">♧ Connect</button></div>
+<div class="controls2"><label>DARKNESS <span id="darknessVal">6/8</span><input id="darkness" type="range" min="1" max="8" value="6"></label><label>COPIES <span id="copiesVal">1</span><input id="copies" type="range" min="1" max="8" value="1"></label></div>
+<label>CENTER ON TAPE <span id="centerVal">0.0 mm</span><input id="center" type="range" min="-5" max="5" step=".1" value="0"></label>
+<div class="actions"><button class="primary" id="printBtn">♧ Print label</button><button id="pngBtn">⇩ Download PNG</button></div>
+<p class="tiny">Connect your Phomemo over Bluetooth, then print your label directly.</p>
+</section>
+</section>
+<aside>
+<section class="panel">
+<div class="panelHead"><b>LABEL CONTENT</b><span>CODE 128</span></div>
+<label>BARCODE DATA<input id="data" value="PW012345" maxlength="80"></label>
+<label>LABEL TITLE<input id="titleText" value="Property of Fresno Unified School District" maxlength="100"></label>
+<div class="switchrow"><label><input id="titleOn" type="checkbox" checked> Print title above bars</label><label><input id="humanOn" type="checkbox" checked> Human-readable text</label></div>
+<label>BAR HEIGHT <span id="barHeightVal">5.2 mm</span><input id="barHeight" type="range" min="2" max="8" step=".1" value="5.2"></label>
+<label>TITLE SIZE <span id="titleSizeVal">16 dots</span><input id="titleSize" type="range" min="8" max="28" value="16"></label>
+<label>TEXT SIZE <span id="textSizeVal">21 dots</span><input id="textSize" type="range" min="8" max="26" value="21"></label>
+</section>
+<section class="panel">
+<div class="panelHead"><b>LABEL STOCK</b><span>D30N ROLL</span></div>
+<label>TAPE WIDTH</label><div class="seg" id="tapeChoices"><button data-v="12">12 mm</button><button class="selected" data-v="14">14 mm</button><button data-v="15">15 mm</button></div>
+<label>LABEL LENGTH</label><div class="seg" id="lengthChoices"><button data-v="22" disabled>22</button><button data-v="30" disabled>30</button><button class="selected" data-v="40">40</button><button data-v="50" disabled>50</button></div>
+<label>NARROW BAR <span id="narrowVal">0.262 mm</span><input id="narrow" type="range" min=".2" max=".6" step=".001" value=".262"></label>
+<label>QUIET ZONE <span id="quietVal">8 modules</span><input id="quiet" type="range" min="4" max="14" value="8"></label>
+</section>
+<section class="panel">
+<div class="panelHead"><b>PRINT QUEUE</b><span id="queueCount">0 ITEMS</span></div>
+<textarea id="queueInput" rows="3" placeholder="Paste one barcode per line…"></textarea>
+<div class="actions"><button class="primary" id="addQueue">＋ Add to queue</button><button id="clearQueue">Clear</button></div>
+<ul id="queueList"></ul>
+</section>
+<section class="panel">
+<div class="panelHead"><b>SAVED SETUPS</b><span>THIS DEVICE</span></div>
+<div class="saveRow"><input id="setupName" placeholder="Name this setup"><button class="primary" id="saveSetup">＋ Save</button></div>
+<select id="setupList"><option value="">Choose a saved setup…</option></select>
+<div class="actions"><button id="loadSetup">Load</button><button id="deleteSetup">Delete</button></div>
+<p class="tiny">Saved locally in this browser on this computer.</p>
+</section>
+<section class="panel">
+<div class="panelHead"><b>LOCAL STATUS</b><span>OFFLINE READY</span></div>
+<p class="tiny">This page, barcode encoder, and settings run locally. Edge Web Bluetooth requires localhost and Bluetooth enabled. No cloud service is used by this app.</p>
+</section>
+</aside>
+</main>
+<div id="toast" role="status"></div><script src="app.js"></script></body></html>
